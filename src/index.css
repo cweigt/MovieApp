@@ -16,6 +16,7 @@ h2 {
   font-size: 48px;
 }
 
+/*This allows it to fit on any device*/
 .card-container {
   display: flex;
   flex-wrap: wrap;

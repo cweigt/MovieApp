@@ -2,6 +2,7 @@
 import { useState } from 'react' 
 
 //card component allows for reusability
+//same as doing function Card(title){}
 const Card = ( { title } ) => { //accepting the title property (prop)
   //a call to the useState hook
   const [hasLiked, setHasLiked] = useState(false) //boolean variable, then a set function to update
@@ -17,12 +18,14 @@ const Card = ( { title } ) => { //accepting the title property (prop)
   )
 }
 
+//Thi is the main function that is called when the app is rendered
+//Each "Card component" below is an instance of the card component above
 const App = () => {
   return (
     <div className="card-container">
-      <Card title="Star Wars" rating={5} isCool={true} />
+      <Card title="Lord of the Rings" rating={5} isCool={true} />
       <Card title="Avatar" />
-      <Card title="Lord of the Rings" />  
+      <Card title="Star Wars" />  
     </div>
   )
 }
