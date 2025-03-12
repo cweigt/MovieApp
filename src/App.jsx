@@ -5,14 +5,16 @@ import { useState } from 'react'
 //same as doing function Card(title){}
 const Card = ( { title } ) => { //accepting the title property (prop)
   //a call to the useState hook
+  //having the useState here allows for seperate liking of each card
   const [hasLiked, setHasLiked] = useState(false) //boolean variable, then a set function to update
   
   return (
     <div className="card">
       <h2>{title}</h2> {/*dynamically rendering title prop*/}
 
-      <button onClick={() => setHasLiked(true)}> {/*this is to toggle the state*/}
-        Like
+      {/*Flipping it to enable the liking and unliking*/}
+      <button onClick={() => setHasLiked(!hasLiked)}> {/*settingHasLiked to the opposite state*/}
+        {hasLiked ? '🩷' : '🤍'} {/*setting display based on state*/}
       </button>
     </div>
   )
