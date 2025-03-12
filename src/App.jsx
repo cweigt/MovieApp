@@ -1,34 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+//everything that starts with the word 'use' is a hook
+import { useState } from 'react' 
 
-function App() {
-  const [count, setCount] = useState(0)
-
+//card component allows for reusability
+const Card = ( { title } ) => { //accepting the title property (prop)
+  //a call to the useState hook
+  const [hasLiked, setHasLiked] = useState(false) //boolean variable, then a set function to update
+  
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="card">
+      <h2>{title}</h2> {/*dynamically rendering title prop*/}
+
+      <button onClick={() => setHasLiked(true)}> {/*this is to toggle the state*/}
+        Like
+      </button>
+    </div>
+  )
+}
+
+const App = () => {
+  return (
+    <div className="card-container">
+      <Card title="Star Wars" rating={5} isCool={true} />
+      <Card title="Avatar" />
+      <Card title="Lord of the Rings" />  
+    </div>
   )
 }
 
