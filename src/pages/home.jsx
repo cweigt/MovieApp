@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Search from './components/Search.jsx';
-import Spinner from './components/Spinner.jsx';
-import MovieCard from './components/MovieCard.jsx';
-//hash router should wrap all of our pages… like a network
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+//the .. is going up one directory, so up to src and then following the path 
+import Search from '../components/Search.jsx';
+import Spinner from '../components/Spinner.jsx';
+import MovieCard from '../components/MovieCard.jsx';
 
 //all for the API thing
 const API_BASE_URL = 'https://api.themoviedb.org/3'; //sending a request to the API
