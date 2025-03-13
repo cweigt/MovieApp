@@ -1,12 +1,14 @@
 //this is a presentational component
 //handles no logic, just accepting props and rendering them
-import React from 'react'
+import React, { useState } from 'react'
 
 //destructring more props from movie
 //creating new lines for readability sake
 const MovieCard = ({ movie: 
-    { title, vote_average, poster_path, release_date, original_language }
+    { title, vote_average, poster_path, release_date, original_language, hasliked }
  }) => {
+  const [hasLiked, setHasLiked] = useState(hasliked); //this is for has liked state
+    
   return (
     <div className="movie-card">
         <img src={poster_path ? 
@@ -28,6 +30,11 @@ const MovieCard = ({ movie:
 
                 <span>•</span>
                 <p className="year">{release_date ? release_date.split('-')[0] : 'N/A'}</p>
+
+                <span>•</span>
+                <button onClick = {() => setHasLiked(!hasLiked)}>
+                    {hasLiked ? '🩷' : '🤍'}
+                </button>
             </div>
         </div>
     </div>
