@@ -33,7 +33,7 @@ const MovieCard = ({ movie:
 
                 <span>•</span>
                 <button onClick = {() => setHasLiked(!hasLiked)}>
-                    {hasLiked ? '🩷' : '🤍'}
+                    {hasLiked ? "🩷" : "🤍"}
                 </button>
             </div>
         </div>
