@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 //the .. is going up one directory, so up to src and then following the path 
 //these are relative paths
 import Search from '../components/Search.jsx';
@@ -79,11 +80,7 @@ const Home = () => {
 
       <div className="wrapper">
         <header>
-          <nav className="flex gap-4 mb-8">
-            {/*this is link to the other pages*/}
-            <Link to="/" className="text-white hover:text-light-100">Home</Link>
-            <Link to="/favorites" className="text-white hover:text-light-100">Favorites</Link>
-          </nav>
+
 
           <img src="./hero.png" alt="Hero Banner" />
           <h1>Find <span className="text-gradient">Movies</span> You Love</h1>

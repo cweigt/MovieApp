@@ -12,10 +12,7 @@ const Favorites = () => {
 
             <div className="wrapper">
                 <header>
-                    <nav className="flex gap-4 mb-8">
-                        <Link to="/" className="text-white hover:text-light-100">Home</Link>
-                        <Link to="/favorites" className="text-white hover:text-light-100">Favorites</Link>
-                    </nav>
+
                 </header>
 
                 <h1>Favorites</h1>
