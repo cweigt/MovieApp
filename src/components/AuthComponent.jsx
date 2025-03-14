@@ -34,12 +34,31 @@ const AuthComponent = () => {
   }
     
   return (
-    <div>
+    <div className="flex flex-col gap-6 max-w-xl mx-auto w-full p-8">
       <input 
         type="email"
         placeholder="Enter email here..."
         onChange={(e) => setEmail(e.target.value)}
+        className="p-4 text-lg rounded bg-gray-800 text-white border border-gray-700"
       />
+      <input 
+        type="password"
+        placeholder="Please type password..."
+        onChange={(e) => setPassword(e.target.value)}
+        className="p-4 text-lg rounded bg-gray-800 text-white border border-gray-700"
+      />
+      <div className="flex gap-4">
+        <button 
+          onClick={signUp}
+          className="flex-1 px-6 py-3 text-lg bg-blue-600 text-white rounded hover:bg-blue-700"
+        >Sign Up
+        </button>
+        <button 
+          onClick={signIn}
+          className="flex-1 px-6 py-3 text-lg bg-green-600 text-white rounded hover:bg-green-700"
+        >Sign In
+        </button>
+      </div>
     </div>
   );
 };
