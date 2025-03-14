@@ -1,6 +1,4 @@
 import React from 'react';
-import { database } from '../firebase';
-import { ref, set, onValue } from 'firebase/database';
 
 const DatabaseComponent = () => {
    return (

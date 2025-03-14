@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
-import { auth } from '../firebase';
+import React, { useState, useEffect } from 'react';
+import { auth, db } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { ref, set } from 'firebase/database';
 
 const AuthComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
+  //this determines whether or not it is ready to go to a new page
+  const [success, setSuccess] = useState(false); 
 
+  //this is just so I can see the update every time success state changes
+  useEffect(() => {
+    console.log(success);
+  }, [success]);
   //the sign up function
   //async because it's "failed to set up" or "set up sucessful"
   //Rule #1: do a try catch block for errors
@@ -14,11 +21,16 @@ const AuthComponent = () => {
     try {
       const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
       //updating user with the new user
+      //putting the user into the Realtime Database
+      await set(ref(db, 'users/' + userCredentials.user.uid), {
+        email: userCredentials.user.email,
+        createdAt: new Date().toISOString()
+      });
       //uid, email, password
       setUser(userCredentials.user); //setting into Firebase
-      window.alert("Sign-up successful: ", userCredentials.user);
+      window.alert("Sign-up successful: " + userCredentials.user.email);
     } catch(error) {
-      window.alert("Sign-up failed: ", error.message);
+      window.alert("Sign-up failed: " + error.message);
     }
   }
 
@@ -27,9 +39,10 @@ const AuthComponent = () => {
     try {
       const userCredentials = await signInWithEmailAndPassword(auth, email, password);
       setUser(userCredentials.user);
-      window.alert("Sign in successful: ", userCredentials.user);
+      window.alert("Sign in successful: " + userCredentials.user);
+      setSuccess(true); //letting know when I can go to next page
     } catch(error) {
-      window.alert("Sign in failed: ", error.message);
+      window.alert("Sign in failed: " + error.message);
     }
   }
     
