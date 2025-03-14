@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 //the .. is going up one directory, so up to src and then following the path 
+//these are relative paths
 import Search from '../components/Search.jsx';
 import Spinner from '../components/Spinner.jsx';
 import MovieCard from '../components/MovieCard.jsx';
@@ -73,17 +75,18 @@ const Home = () => {
 
   return (
     <main> 
-
-      <div className="pattern"/> {/*Self closing div with classname*/}
+      <div className="pattern"/> 
 
       <div className="wrapper">
         <header>
-          <img src="./hero.png" alt="Hero Banner" />
+          <nav className="flex gap-4 mb-8">
+            {/*this is link to the other pages*/}
+            <Link to="/" className="text-white hover:text-light-100">Home</Link>
+            <Link to="/favorites" className="text-white hover:text-light-100">Favorites</Link>
+          </nav>
 
-          <h1>Find <span className="text-gradient">Movies</span> You'll Love</h1>
-        
-          {/*Passing useState props/inputs to the Search component*/}
-          {/*Child search component*/}
+          <img src="./hero.png" alt="Hero Banner" />
+          <h1>Find <span className="text-gradient">Movies</span> You Love</h1>
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
         </header>
 

@@ -1,13 +1,14 @@
 //this is a presentational component
 //handles no logic, just accepting props and rendering them
-import React, { useState } from 'react'
+import React from 'react'
+import useFavorites from '../hooks/useFavorites';
 
 //destructring more props from movie
 //creating new lines for readability sake
-const MovieCard = ({ movie: 
-    { title, vote_average, poster_path, release_date, original_language, hasliked }
- }) => {
-  const [hasLiked, setHasLiked] = useState(hasliked); //this is for has liked state
+const MovieCard = ({ movie }) => {
+  //importing two of the return states from useFavorites.jsx
+  const { toggleFavorite, isInFavorites } = useFavorites();
+  const { title, vote_average, poster_path, release_date, original_language } = movie;
     
   return (
     <div className="movie-card">
@@ -32,8 +33,9 @@ const MovieCard = ({ movie:
                 <p className="year">{release_date ? release_date.split('-')[0] : 'N/A'}</p>
 
                 <span>•</span>
-                <button onClick = {() => setHasLiked(!hasLiked)}>
-                    {hasLiked ? "🩷" : "🤍"}
+                {/*Passing the movie object to the toggleFavorite function*/}
+                <button onClick={() => toggleFavorite(movie)}>
+                    {isInFavorites(movie.id) ? "🩷" : "🤍"}
                 </button>
             </div>
         </div>

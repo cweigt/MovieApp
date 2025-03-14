@@ -10,6 +10,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Home/>}></Route> {/*this is the default page*/}
+        <Route path="/favorites" element={<Favorites/>}></Route>
       </Routes>
     </Router>
   )
