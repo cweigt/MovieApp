@@ -2,15 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { ref, set } from 'firebase/database';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpComponent = () => {
+  const navigate = useNavigate();
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
   //this determines whether or not it is ready to go to a new page
-  const [success, setSuccess] = useState(false); 
+  const [shouldRedirect, setShouldRedirect] = useState(false); 
+
+  //running this everytime shouldRedirect changes
+  useEffect(() => {
+    if(shouldRedirect) {
+      navigate('../pages/sign_in');
+    }
+  }, [shouldRedirect, navigate]);
 
   //the sign up function
   //async because it's "failed to set up" or "set up sucessful"
@@ -30,6 +40,7 @@ const SignUpComponent = () => {
       //uid, email, password
       setUser(userCredentials.user); //setting into Authenticator
       window.alert("Sign-up successful: " + userCredentials.user.email);
+      setShouldRedirect(true); //triggers the useEffect()
     } catch(error) {
       window.alert("Sign-up failed: " + error.message);
     }

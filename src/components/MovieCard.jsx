@@ -5,7 +5,7 @@ import useFavorites from '../hooks/useFavorites';
 
 //destructring more props from movie
 //creating new lines for readability sake
-const MovieCard = ({ movie }) => {
+const MovieCardComponent = ({ movie }) => {
   //importing two of the return states from useFavorites.jsx
   const { toggleFavorite, isInFavorites } = useFavorites();
   const { title, vote_average, poster_path, release_date, original_language } = movie;
@@ -43,4 +43,4 @@ const MovieCard = ({ movie }) => {
   )
 }
 
-export default MovieCard
+export default MovieCardComponent;

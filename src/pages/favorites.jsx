@@ -1,9 +1,9 @@
 import React from 'react';
 import MovieCard from '../components/MovieCard.jsx';
-import useFavorites from '../hooks/useFavorites';
+import useFavoritesHook from '../hooks/useFavorites';
 
 const Favorites = () => {
-    const { favorites } = useFavorites();
+    const { favorites } = useFavoritesHook(); //calling this from Firebase 
 
     return (
         <main>

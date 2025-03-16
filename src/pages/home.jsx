@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 //the .. is going up one directory, so up to src and then following the path 
 //these are relative paths
-import Search from '../components/Search.jsx';
-import Spinner from '../components/Spinner.jsx';
-import MovieCard from '../components/MovieCard.jsx';
+import SearchComponent from '../components/Search.jsx';
+import SpinnerComponent from '../components/Spinner.jsx';
+import MovieCardComponent from '../components/MovieCard.jsx';
 
 //all for the API thing
 const API_BASE_URL = 'https://api.themoviedb.org/3'; //sending a request to the API
@@ -83,7 +83,7 @@ const Home = () => {
 
           <img src="./hero.png" alt="Hero Banner" />
           <h1>Find <span className="text-gradient">Movies</span> You Love</h1>
-          <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+          <SearchComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
         </header>
 
         <section className="all-movies">
@@ -92,7 +92,7 @@ const Home = () => {
           {/*Ternary operators for formatting*/}
           {/*this is conditional rendering*/}
           {isLoading ? (
-            <Spinner/>
+            <SpinnerComponent />
           ) : errorMessage ? (
             <p className="text-red-500">{errorMessage}</p>
           ) : (
@@ -100,7 +100,7 @@ const Home = () => {
               {/*using map to iterate over the array of movies*/}
               {/*making sure to give it an index*/}
               {movieList.map((movie) => (
-                <MovieCard key={movie.id} movie={movie}/>
+                <MovieCardComponent key={movie.id} movie={movie}/>
               ))}
             </ul>
           )}

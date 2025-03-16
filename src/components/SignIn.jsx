@@ -3,17 +3,18 @@ import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const SignInComponent = () => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
-  const [success, setSuccess] = useState(false); 
+
+
   //the sign in function
   const signIn = async () => {
       try {
           const userCredentials = await signInWithEmailAndPassword(auth, email, password);
           setUser(userCredentials.user);
           window.alert("Sign in successful: " + userCredentials.user);
-          setSuccess(true); //letting know when I can go to next page
           //this will be for going back go the home page
       } catch(error) {
       window.alert("Sign in failed: " + error.message);

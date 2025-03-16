@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 import Home from './pages/home';
 import Favorites from './pages/favorites';
 import Sign_Up from './pages/sign_up';
 import Sign_In from './pages/sign_in';
+
 
 //moved everything that was here to the home.jsx file
 //this will be for the router and multiple pages
@@ -44,7 +45,7 @@ const App = () => {
             <Route path="/" element={<Home/>} />
             <Route path="/favorites" element={<Favorites/>} />
             <Route path="/sign_up" element={<Sign_Up/>} />
-            <Route path="/sign_in" element={<Sign_In />} />
+            <Route path="/sign_in" element={<Sign_In/>} />
           </Routes>
         </div>
       </main>
