@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 //the .. is going up one directory, so up to src and then following the path 
 //these are relative paths
