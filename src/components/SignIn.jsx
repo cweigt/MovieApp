@@ -15,11 +15,13 @@ const SignInComponent = () => {
           const userCredentials = await signInWithEmailAndPassword(auth, email, password);
           setUser(userCredentials.user);
           window.alert("Sign in successful: " + userCredentials.user);
-          //this will be for going back go the home page
+          //navigating back home
+          //navigate('../pages/home');
       } catch(error) {
       window.alert("Sign in failed: " + error.message);
       }
   }
+
   return (
     <div className="flex flex-col gap-6 max-w-xl mx-auto w-full p-8">
         <input 

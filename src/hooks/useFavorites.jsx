@@ -13,7 +13,7 @@ const useFavoritesHook = () => {
         const listener = auth.onAuthStateChanged((user) => {
             setUser(user);
             if (user) {
-                // If user is logged in, get their favorites from Firebase
+                //If user is logged in, get their favorites from Firebase
                 const favoritesRef = ref(db, `users/${user.uid}/favorites`);
                 //onValue is realtime udpates
                 //using snapshot because that is how firebase returns the data found in the above reference

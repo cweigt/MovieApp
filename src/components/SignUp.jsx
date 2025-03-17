@@ -1,27 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { auth, db } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { ref, set } from 'firebase/database';
-import { useNavigate } from 'react-router-dom';
+import { updateProfile } from 'firebase/auth';
 
 const SignUpComponent = () => {
-  const navigate = useNavigate();
-
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
-  //this determines whether or not it is ready to go to a new page
-  const [shouldRedirect, setShouldRedirect] = useState(false); 
 
-  //running this everytime shouldRedirect changes
-  useEffect(() => {
-    if(shouldRedirect) {
-      navigate('../pages/sign_in');
-    }
-  }, [shouldRedirect, navigate]);
-
+  //this is for updating user profile
+  const setDisplayName = async (user, firstName, lastName) => {
+    await updateProfile(user, {
+      displayName: `${firstName} ${lastName}`
+    });
+  };
   //the sign up function
   //async because it's "failed to set up" or "set up sucessful"
   //Rule #1: do a try catch block for errors
@@ -29,6 +24,7 @@ const SignUpComponent = () => {
     try {
       //apparently this only takes email and password, not first or last name
       const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+      //**NOTE: apparently user stays signed in after creating account, I just need to show it
       //updating user with the new user
       //putting the user into the Realtime Database
       await set(ref(db, 'users/' + userCredentials.user.uid), {
@@ -37,10 +33,12 @@ const SignUpComponent = () => {
         lastName: lastName,
         createdAt: new Date().toISOString()
       });
+      //updating profile
+      setDisplayName(userCredentials.user, firstName, lastName);
+      
       //uid, email, password
       setUser(userCredentials.user); //setting into Authenticator
       window.alert("Sign-up successful: " + userCredentials.user.email);
-      setShouldRedirect(true); //triggers the useEffect()
     } catch(error) {
       window.alert("Sign-up failed: " + error.message);
     }
