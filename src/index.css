@@ -199,3 +199,8 @@ button {
     color: red;
     margin: 10px 0;
 }
+
+.logo {
+  width: 10%;
+  height: auto;
+}

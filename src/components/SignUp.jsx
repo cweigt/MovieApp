@@ -26,6 +26,7 @@ const SignUpComponent = () => {
       const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
       //**NOTE: apparently user stays signed in after creating account, I just need to show it
       //updating user with the new user
+      setUser(userCredentials.user);
       //putting the user into the Realtime Database
       await set(ref(db, 'users/' + userCredentials.user.uid), {
         email: userCredentials.user.email,
@@ -33,11 +34,10 @@ const SignUpComponent = () => {
         lastName: lastName,
         createdAt: new Date().toISOString()
       });
-      //updating profile
-      setDisplayName(userCredentials.user, firstName, lastName);
+
+      // Updating profile with display name
+      await setDisplayName(userCredentials.user, firstName, lastName);
       
-      //uid, email, password
-      setUser(userCredentials.user); //setting into Authenticator
       window.alert("Sign-up successful: " + userCredentials.user.email);
     } catch(error) {
       window.alert("Sign-up failed: " + error.message);

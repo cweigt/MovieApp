@@ -74,39 +74,35 @@ const Home = () => {
   }, [searchTerm]); //when having variable in there, it runs this everytime that is updated
 
   return (
-    <main> 
-      <div className="pattern"/> 
+    <div className="wrapper">
+      <header>
+        {/*<img src="./logo.png" alt="Logo" className="logo" />*/}
 
-      <div className="wrapper">
-        <header>
+        <img src="./hero.png" alt="Hero Banner" />
+        <h1>Find <span className="text-gradient">Movies</span> You Love</h1>
+        <SearchComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+      </header>
 
+      <section className="all-movies">
+        <h2 className="mt-40px">All Movies</h2>
 
-          <img src="./hero.png" alt="Hero Banner" />
-          <h1>Find <span className="text-gradient">Movies</span> You Love</h1>
-          <SearchComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-        </header>
-
-        <section className="all-movies">
-          <h2 className="mt-40px">All Movies</h2>
-
-          {/*Ternary operators for formatting*/}
-          {/*this is conditional rendering*/}
-          {isLoading ? (
-            <SpinnerComponent />
-          ) : errorMessage ? (
-            <p className="text-red-500">{errorMessage}</p>
-          ) : (
-            <ul>
-              {/*using map to iterate over the array of movies*/}
-              {/*making sure to give it an index*/}
-              {movieList.map((movie) => (
-                <MovieCardComponent key={movie.id} movie={movie}/>
-              ))}
-            </ul>
-          )}
-        </section>
-      </div>
-    </main>
+        {/*Ternary operators for formatting*/}
+        {/*this is conditional rendering*/}
+        {isLoading ? (
+          <SpinnerComponent />
+        ) : errorMessage ? (
+          <p className="text-red-500">{errorMessage}</p>
+        ) : (
+          <ul>
+            {/*using map to iterate over the array of movies*/}
+            {/*making sure to give it an index*/}
+            {movieList.map((movie) => (
+              <MovieCardComponent key={movie.id} movie={movie}/>
+            ))}
+          </ul>
+        )}
+      </section>
+    </div>
   );
 };
 
