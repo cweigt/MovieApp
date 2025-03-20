@@ -8,20 +8,26 @@ import Sign_In from './pages/sign_in';
 import ProfileComponent from './components/Profile';
 
 const App = () => {
-  const [user, setUser] = useState(null); // passing this in as a prop down below
+  const [authUser, setAuthUser] = useState(null); // passing this in as a prop down below
 
   // This runs once when component is mounted… checking to see if a user is logged in
   useEffect(() => {
     const listener = auth.onAuthStateChanged((authUser) => {
+      console.log('Auth User in listener:', authUser); // Log the authUser value
       if (authUser) {
-        setUser(authUser);  // Set the authenticated user
+        setAuthUser(authUser); // Set the authenticated user
       } else {
-        setUser(null);  // Clear user on sign out
+        setAuthUser(null); // Clear user on sign-out
       }
     });
 
     return () => listener(); // Clean up subscription on unmount
-  }, []);
+  }, []); // Runs once on mount, then cleans up when the component unmounts
+
+  // Log the current authUser on every render
+  useEffect(() => {
+    console.log('Updated authUser:', authUser); // Logs whenever authUser changes
+  }, [authUser]); // Dependency array ensures this runs when authUser updates
 
   return (
     <Router>
@@ -42,13 +48,12 @@ const App = () => {
                 >Favorites</NavLink>
               </div>
               <div className="flex gap-4">
-                {/*conditional rendering for Login and Sign Out*/}
-                {user ? (
-                  
+                {/* conditional rendering for Login and Sign Out */}
+                {authUser ? (
                   <button
                     onClick={() => {
-                      auth.signOut();  // Firebase sign out
-                      setUser(null);  // Reset the user state
+                      auth.signOut(); // Firebase sign out
+                      setAuthUser(null); // Reset the user state
                     }}
                     className="text-white hover:text-light-100"
                   >Sign Out
@@ -68,14 +73,18 @@ const App = () => {
                 )}
 
                 {/* Profile component only shows if user is logged in */}
-                {user && <ProfileComponent user={user} />}
+                {authUser === null ? (
+                  <p className="transparent">Loading</p> // Optional: Display loading state when authUser is null
+                ) : (
+                  <ProfileComponent user={authUser} />
+                )}
               </div>
             </nav>
           </header>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/favorites" element={<Favorites />} />
-            <Route path="/sign_up" element={<Sign_Up />} />
+            <Route path="/sign_up" element={<Sign_Up setUser={setAuthUser} />} />
             <Route path="/sign_in" element={<Sign_In />} />
           </Routes>
         </div>

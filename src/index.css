@@ -204,3 +204,7 @@ button {
   width: 10%;
   height: auto;
 }
+
+.transparent {
+  opacity: 0;
+}

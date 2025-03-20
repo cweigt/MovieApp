@@ -1,7 +1,7 @@
 import React from 'react';
 import SignUpComponent from '../components/SignUp';
 
-const Sign_Up = () => {
+const Sign_Up = ({ setUser }) => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-full">
@@ -11,7 +11,7 @@ const Sign_Up = () => {
       </div>
       
       <div className="mt-4 w-full max-w-xl">
-        <SignUpComponent />
+        <SignUpComponent setUser={setUser}/>
       </div>
     </div>
   );
