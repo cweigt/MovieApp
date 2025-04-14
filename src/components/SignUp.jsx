@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { auth, db } from '../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile, getAuth, getIdToken } from 'firebase/auth';
 import { ref, set } from 'firebase/database';
-import { updateProfile, getAuth, getIdToken } from 'firebase/auth';
 
 const SignUpComponent = ({ setUser }) => {
   const [firstName, setFirstName] = useState('');
@@ -21,12 +20,13 @@ const SignUpComponent = ({ setUser }) => {
   const signUp = async () => {
     try {
       const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
-      setUser(userCredentials.user);
-      console.log('User set:', userCredentials.user);
 
-      // Manually refresh the user's token (this will fetch a new ID token)
-      const currentUser = getAuth().currentUser;
-      await getIdToken(currentUser, true); // true forces a refresh
+      await setDisplayName(userCredentials.user, firstName, lastName);
+
+      await userCredentials.user.reload();
+      const updatedUser = auth.currentUser;
+
+      setUser({ ...updatedUser }); //forcing re render
 
       await set(ref(db, 'users/' + userCredentials.user.uid), {
         email: userCredentials.user.email,
@@ -35,8 +35,12 @@ const SignUpComponent = ({ setUser }) => {
         createdAt: new Date().toISOString()
       });
 
-      await setDisplayName(userCredentials.user, firstName, lastName);
       window.alert("Sign-up successful: " + userCredentials.user.email);
+      
+      setPassword('');
+      setEmail('');
+      setFirstName('');
+      setLastName('');
     } catch (error) {
       window.alert("Sign-up failed: " + error.message);
     }

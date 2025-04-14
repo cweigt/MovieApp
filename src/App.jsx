@@ -15,7 +15,9 @@ const App = () => {
     const listener = auth.onAuthStateChanged((authUser) => {
       console.log('Auth User in listener:', authUser); // Log the authUser value
       if (authUser) {
-        setAuthUser(authUser); // Set the authenticated user
+        authUser.reload();
+        const refreshedUser = auth.currentUser;
+        setAuthUser(refreshedUser); // Set the authenticated user
       } else {
         setAuthUser(null); // Clear user on sign-out
       }
@@ -24,7 +26,7 @@ const App = () => {
     return () => listener(); // Clean up subscription on unmount
   }, []); // Runs once on mount, then cleans up when the component unmounts
 
-  // Log the current authUser on every render
+  // Log the current authUser on every render()
   useEffect(() => {
     console.log('Updated authUser:', authUser); // Logs whenever authUser changes
   }, [authUser]); // Dependency array ensures this runs when authUser updates
