@@ -14,7 +14,7 @@ export default defineConfig({
         short_name: 'Movies',
         theme_color: '#000000',
         background_color: '#ffffff',
-        display: 'fullscreen',
+        display: 'standalone',
         orientation: 'portrait-primary',
         base: '/',
         icons: [
