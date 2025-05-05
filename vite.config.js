@@ -21,14 +21,14 @@ export default defineConfig({
         base: '/',
         icons: [
           {
-            src: 'popcorn192.png',
+            src: 'popcorn192.svg',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/svg'
           },
           {
-            src: 'popcorn512.png',
+            src: 'popcorn512.svg',
             sizes: '512x512',
-            type: 'image/png'
+            type: 'image/svg'
           }
         ]
       }
