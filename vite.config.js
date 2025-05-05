@@ -12,12 +12,13 @@ export default defineConfig({
       manifest: {
         name: 'Top Movies',
         short_name: 'Movies',
-        theme_color: '#0d47a1',
+        //theme_color: '#0d47a1',
         //background_color: '#ffffff',
         display: 'fullscreen',
         orientation: 'portrait-primary',
         start_url: '/',
         scope: '/',
+        base: '/',
         icons: [
           {
             src: 'popcorn192.png',
