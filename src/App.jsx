@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { auth } from './firebase';
-import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, NavLink, Navigate } from 'react-router-dom';
 import Home from './pages/home';
 import Favorites from './pages/favorites';
 import Sign_Up from './pages/sign_up';
@@ -88,6 +88,7 @@ const App = () => {
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/sign_up" element={<Sign_Up setUser={setAuthUser} />} />
             <Route path="/sign_in" element={<Sign_In />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
       </main>
