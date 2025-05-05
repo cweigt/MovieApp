@@ -12,8 +12,8 @@ export default defineConfig({
       manifest: {
         name: 'Top Movies',
         short_name: 'Movies',
-        //theme_color: '#0d47a1',
-        //background_color: '#ffffff',
+        theme_color: '#000000',
+        background_color: '#ffffff',
         display: 'fullscreen',
         orientation: 'portrait-primary',
         start_url: '/',
