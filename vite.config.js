@@ -12,11 +12,12 @@ export default defineConfig({
       manifest: {
         name: 'Top Movies',
         short_name: 'Movies',
+        scope: 'https://main.dr90yn8ttzs9o.amplifyapp.com/',
         theme_color: '#000000',
         background_color: '#ffffff',
-        display: 'standalone',
+        display: 'fullscreen',
         orientation: 'portrait-primary',
-        base: '/',
+        start_url: '/',
         icons: [
           {
             src: 'popcorn192.svg',
