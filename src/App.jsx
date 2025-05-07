@@ -49,7 +49,7 @@ const App = () => {
                 }
                 >Favorites</NavLink>
               </div>
-              <div className="flex gap-4 ml-8">
+              <div className="flex gap-4 ml-15">
                 {/* conditional rendering for Login and Sign Out */}
                 {authUser ? (
                   <button
