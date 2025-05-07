@@ -38,7 +38,7 @@ const App = () => {
         <div className="wrapper">
           <header>
             <nav className="flex justify-between mb-8">
-              <div className="flex gap-4 ml-20">
+              <div className="flex gap-4 ml-8">
                 <NavLink to="/" className={({ isActive }) =>
                   `text-white hover:text-light-100 ${isActive ? "underline" : ""}`
                 }
@@ -49,7 +49,7 @@ const App = () => {
                 }
                 >Favorites</NavLink>
               </div>
-              <div className="flex gap-4">
+              <div className="flex gap-4 ml-8">
                 {/* conditional rendering for Login and Sign Out */}
                 {authUser ? (
                   <button
