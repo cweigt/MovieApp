@@ -14,7 +14,7 @@
       }
     ],
     "start_url": ".",
-    "display": "standalone",
+    "display": "fullscreen",
         "_comment1": "standalone means that it won't show browser UI",
     "theme_color": "#0d47a1",
     "background_color": "#ffffff",
